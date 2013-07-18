@@ -4,7 +4,7 @@ describe WsConfigus::Builder do
   before do
     @c = WsConfigus::Builder.build :test do
       env :test do
-        name "Petya"
+        sname "Petya"
       end
     end
   end
@@ -14,6 +14,6 @@ describe WsConfigus::Builder do
   end
 
   it "must return 'Petya'" do
-    @c.name.must_equal 'Petya'
+    @c.sname.must_equal 'Petya'
   end
 end
