@@ -1,15 +1,15 @@
 module WsConfigus
   class Environment < BasicObject
-    def self.method_missing name, *args, &block
-      if block_given?
-        @config[name] = Environment.build &block
+    def method_missing name, *args, &block
+      if block.nil?
+        @config[name] = args.first
         @config.singleton_class.instance_eval do
           define_method(name) do
             self[name]
           end
         end
       else
-        @config[name] = args.first
+        @config[name] = Environment.new.build &block
         @config.singleton_class.instance_eval do
           define_method(name) do
             self[name]
@@ -18,7 +18,7 @@ module WsConfigus
       end
     end
 
-    def self.build &block
+    def build &block
       @config = Config.new
       instance_eval &block
       @config
