@@ -1,5 +1,5 @@
 require "ws_configus/version"
 
 module WsConfigus
-  # Your code goes here...
+  autoload 'Builder', 'ws_configus/builder'
 end
