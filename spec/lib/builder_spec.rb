@@ -4,7 +4,8 @@ describe WsConfigus::Builder do
   before do
     @c = WsConfigus::Builder.build :test do
       env :test do
-        sname "Petya"
+        first_name "Petya"
+        last_name "Ivanov"
       end
     end
   end
@@ -13,7 +14,8 @@ describe WsConfigus::Builder do
     @c.must_be_instance_of WsConfigus::Config
   end
 
-  it "must return 'Petya'" do
-    @c.sname.must_equal 'Petya'
+  it "should return value for key" do
+    @c.first_name.must_equal 'Petya'
+    @c.last_name.must_equal 'Ivanov'
   end
 end

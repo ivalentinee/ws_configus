@@ -1,16 +1,18 @@
 module WsConfigus
   class Environment < BasicObject
-    def self.method_missing name, *args, &block
-      raise '--- +++ Environment +++ ---'
+    def self.method_missing name, arg, &block
+      @config.class.instance_eval do
+        define_method(name) do
+          arg
+        end
+      end
+      @config[name] = arg
     end
 
     def self.build &block
-      Config.class_eval do
-        def name
-          'Petya'
-        end
-      end
+      @config = Config.new
       instance_eval &block
+      @config
     end
   end
 end

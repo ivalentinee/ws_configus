@@ -6,7 +6,6 @@ module WsConfigus
 
     def self.build env, &block
       instance_eval &block
-      Config.new
     end
   end
 end
